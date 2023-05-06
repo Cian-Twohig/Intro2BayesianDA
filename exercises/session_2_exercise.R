@@ -83,3 +83,17 @@ library(tidyverse)
 names(diamonds)
 View(diamonds)
 
+library(dplyr)
+
+#which, filter, select
+
+?which
+ideal_diamonds <- which(diamonds$cut == 'Ideal') #returns indices of ideal diamonds in vector form
+
+?filter
+ideal_diamonds_2 <- filter(diamonds, cut == 'Ideal') #returns dataframe containing all diamonds (and variables) of an ideal cut
+
+?select
+dimensions <- ideal_diamonds_2 %>% select(x, y, z)
+
+       
