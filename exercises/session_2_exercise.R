@@ -74,3 +74,12 @@ income_summary
 ## 3   Top 10%     4014  4979
 ## 4    Top 1%     6125  6737
 
+#Exercise 3
+df <- data.frame(c(5,4,3,2,1), c(10,9,8,7,6), c(1,3,5,7,9), c(9, 7, 5, 3, 2), c(3, 77, 7, 4, 6))
+means <- c(mean(df[, 1]), mean(df[, 2]), mean(df[, 3]), mean(df[, 4]), mean(df[, 5]))
+means_2<- apply(df, 2, mean)
+
+library(tidyverse)
+names(diamonds)
+View(diamonds)
+
