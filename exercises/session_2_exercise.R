@@ -33,7 +33,7 @@ z
 #2.3
 n <- 1e4
 scale <- 1.5e4
-income <- round( rbeta(n=n, shape1=2, shape2=12) * scale, 2)
+income <- round( rbeta(n=n, shape1=3, shape2=8) * scale, 2) #according to economists, income typically follows 
 
 library(ggplot2) # only load (run) once
 
@@ -44,4 +44,33 @@ ggplot(data.frame(x = income), aes(x=x)) +
   labs(x = "Gross income", 
        y = "Counts") + 
   theme_minimal()
+
+income_sum <- sum(income) #total income across the population
+income_share <- income / income_sum #each individuals share of the summed income across the population
+
+#More comprehensive code:
+
+?sort
+income_s <- sort(income) #sorts income
+
+group <- c("Lower 1%", "Lower 50%", "Top 10%", "Top 1%") #splits the income based on different groups
+p <- c(.1, .5, .9, .99)
+
+boundary <- round(income_s[p*n], 0) #sets boundary for groups at a specific individual
+
+low10_m <- mean( income_s[c(1:(.1*n))] ) #Calculates the mean income for the lowest 10% of the population
+low50_m <- mean( income_s[c(1:(.5*n))] ) #Calculates the mean income for the lower 50% of the population
+top10_m <- mean( income_s[c((.9*n):n)] ) #Calculates the mean income for the top 10% of the population
+top1_m <- mean( income_s[c((.99*n):n)] ) #Calculates the mean income for the top 1% of the population
+
+means <-  round( c(low10_m, low50_m, top10_m, top1_m) , 0) #puts the (rounded) means income of the groups specified above in a vector
+
+income_summary <- data.frame(group, boundary, means)
+income_summary
+
+##       group boundary means
+## 1  Lower 1%      618   398
+## 2 Lower 50%     1865  1073
+## 3   Top 10%     4014  4979
+## 4    Top 1%     6125  6737
 
