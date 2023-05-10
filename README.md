@@ -8,9 +8,13 @@ Testing Pulling in Class with this sentence!
 
 Testing pushing in class! 
 
+<<<<<<< HEAD
 Hey hey is it working?
+=======
+Heyo we're making changes in the branch boys!
+I hope its working! 
+>>>>>>> 6c8dbf2eabe57860845c4f47151dae18c9dd0c3c
 
 <<<<<<< HEAD
 =======
-Is the branch working?! 
 >>>>>>> 0f6bef6d1ee933eaeb212b4b3175bde08bb47c4d
