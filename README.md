@@ -8,6 +8,8 @@ Testing Pulling in Class with this sentence!
 
 Testing pushing in class! 
 
+Testing feature branch! 
+
 <<<<<<< HEAD
 =======
 Is the branch working?! 
