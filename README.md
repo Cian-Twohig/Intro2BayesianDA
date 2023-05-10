@@ -11,6 +11,8 @@ Testing pushing in class!
 Heyo we're making changes in the branch boys!
 I hope its working! 
 
+Hi Linus, how are you? 
+
 <<<<<<< HEAD
 =======
 Is the branch working?! 
