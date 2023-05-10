@@ -4,6 +4,8 @@ Hey What's up? :)
 
 How you doing?! 
 
+Testing Pulling in Class with this sentence! 
+
 <<<<<<< HEAD
 =======
 Is the branch working?! 
