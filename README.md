@@ -8,6 +8,12 @@ Testing Pulling in Class with this sentence!
 
 Testing pushing in class! 
 
+Heyo we're making changes in the branch boys!
+I hope its working! 
+
+Hi Linus, how are you?
+Hi Cian!
+
 <<<<<<< HEAD
 Hey hey is it working?
 =======

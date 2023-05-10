@@ -33,7 +33,12 @@ z
 #2.3
 n <- 1e4
 scale <- 1.5e4
-income <- round( rbeta(n=n, shape1=3, shape2=8) * scale, 2) #according to economists, income typically follows 
+income <- round( rbeta(n=n, shape1=3, shape2=8) * scale, 2) 
+
+#According to economists, income typically follows a log-normal distribution.
+#Changed the rbeta to reflect income distribution in the population more accurately, in accordance to:
+#Is income a lognormal distribution?
+#The traditional parametrization of the income distribution is log normal with a thick, Pareto upper tail. The classic explanation for log normality of income is Gibrat's (1931) law, which essentially models income as an accumulation of random multiplicative shocks.
 
 library(ggplot2) # only load (run) once
 
