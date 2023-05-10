@@ -6,6 +6,8 @@ How you doing?!
 
 Testing Pulling in Class with this sentence! 
 
+Testing pushing in class! 
+
 <<<<<<< HEAD
 =======
 Is the branch working?! 
