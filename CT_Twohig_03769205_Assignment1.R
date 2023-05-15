@@ -146,7 +146,7 @@ L
 likelihoods <- dbinom(L, n, prob = theta)
 likelihoods
 
-#10
+#10-----------------------------------------------------------------------------------------------------------
 
 #Use Bayes' rule to calculate the posterior distribution. 
 
