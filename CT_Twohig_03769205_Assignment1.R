@@ -87,20 +87,81 @@ table(outcomes$sum)
 #which.max(table()) to see which value occurs most often (7 in this case).
 which.max(table(outcomes$sum))
 
-#An alternative would be to write a function for the mode of a column, 
-#unfortunately a built in mode() function does not exist in R. 
-
 #for simplicity, I simply sum the probability of the sum of outcomes being equal to 7 below (I know it could be "fancier" to generalise to all dataframes).
 sum(subset(outcomes, outcomes$sum == 7)$probability)
 
-group_by(outcomes, outcomes$sum)
+#Unfortunately, I could not find a simple function for the mode(). Ideally the code above code be generalised to dices of different sizes.
+#Hopefully, this suffices for this assignment! 
 
-count(outcomes, sum)
-max(count(outcomes, sum))
-count(outcomes, sum)
+#------------------------------------------------------------------------------------
+#Probability of Delay
+
+#8
+
+?dbinom() #dbinom(x, size, prob, log = FALSE)
+
+theta <- seq(0, 1, 0.1) #vector with containing different probabilities of delay
+n <- 10    #number of trains.
+
+#Creating a dataframe with the probabilities in the first column.
+probability_of_delay <- data.frame(prob = theta)
+
+#using a loop, the probability distribution over all possible numbers of delays are calculated. 
+for (i in 0:n){
+  probability_of_delay <- cbind(probability_of_delay, dbinom(i, n, theta))}
+
+#by using cbind() in the loop, the dataframe has the number of delays (with corresponding probability distributions as values) as columns.
+
+#Changing column names for completeness:
+colnames(probability_of_delay)[2:12] <- 0:11
+probability_of_delay
 
 
+#9
 
+#Calculate the likelihood of observing the data below, given the probabilities above. 
+
+#Copied Code:
+sim_rides <- function(N, p){
+  sample(c("L", "O"), size=N, replace=TRUE, prob=c(p, 1-p))
+}
+set.seed(1237)
+obs <- sim_rides(10, .3)
+obs
+
+#sum the total number of late trains:
+L <- as.numeric(sum(obs == "L"))
+L
+
+#computing the likelihood of that many delayed trains (in this case we observe "L" five times),
+#given different probabilities of delay. 
+
+likelihoods <- dbinom(L, n, prob = theta)
+likelihoods
+
+#10
+
+#Use Bayes' rule to calculate the posterior distribution. 
+
+#Assuming the below prior possibilities:
+prior <- c(0.000, 0.004, 0.041, 0.123, 0.209, 0.246, 0.209, 0.123, 0.041, 0.004, 0.000)
+
+#calculate the posterior
+posterior <- likelihoods * prior
+posterior
+
+#Normalizing the posterior so it adds up to a total probability of 1:
+posterior_norm <- posterior / sum(posterior)
+
+#the posterior probabilities based on the prior probabilities and likelihoods:
+posterior_norm
+
+sum(posterior_norm)
+#it works! 
+
+#adding the posterior to the probability of delay dataframe
+probability_of_delay$posterior <- round(posterior_norm, 10)
+probability_of_delay
 
 
 
