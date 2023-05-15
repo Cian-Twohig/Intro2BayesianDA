@@ -5,9 +5,9 @@ rm(list = ls())
 
 library(tidyverse)
 
-#2 Dice
+# 2 Dice------------------------------------------------------------------------------------------------------
 
-#1
+#1-----------------------------------------------------------------------------------------------------------
 
 dice1 <- c(1, 2, 3, 4, 5, 6) #Declaring first dice, obviously has six possible outcomes in the sample space
 dice2 <- c(1, 2, 3, 4, 5, 6) #Declaring second dice
@@ -18,7 +18,9 @@ dice2
 is.vector(dice1) #Checking if dice is a vector, just to be sure
 class(dice1) #Checking the contents of the dice (numeric)
 
-#2
+
+#2-----------------------------------------------------------------------------------------------------------
+
 
 ?expand_grid() #Checking what the expand grid function does
 
@@ -28,7 +30,7 @@ outcomes <- expand_grid(dice1, dice2)
 outcomes
 tail(outcomes)
 
-#3
+#3-----------------------------------------------------------------------------------------------------------
 
 #Each possible combination of dice has the same probability of occuring. 
 #Therefore, to specific the probability of each outcome, a column can be added simply dividing
@@ -41,7 +43,7 @@ outcomes
 colnames(outcomes) <- c('dice1', 'dice2', 'probability')
 outcomes
 
-#4
+#4-----------------------------------------------------------------------------------------------------------
 
 #Create sum of dice1 outcome and dice2 outcome by simply summing the first and second column.
 outcomes$sum <- outcomes$dice1 + outcomes$dice2
@@ -50,7 +52,7 @@ outcomes
 #adding column name for completeness
 colnames(outcomes)[4] <- 'sum'
 
-#5
+#5-----------------------------------------------------------------------------------------------------------
 
 ?subset() #subset(x, subset, select, drop = FALSE, ...), select subsets of dataframe using subset, select for columns
 ?filter() #filter(.data, ..., .by = NULL, .preserve = FALSE), filter dataframe based on logical experession
@@ -66,20 +68,26 @@ P_E1_subset <- subset(outcomes, outcomes$dice1 == 3)
 
 #Execute conditional probability formula:
 cond_prob <-sum(P_E1_E2_subset$probability) / sum(P_E1_subset$probability)
+cond_prob
 
 #The probability of the sum of two die being >= 7, given that the first dice equals 3, is 50%. 
 
-#6
+
+#6-----------------------------------------------------------------------------------------------------------
 
 #Create a subset of the possible outcomes with a sum between 4 and 9:
 sum_4to9 <- subset(outcomes, outcomes$sum >= 4 & outcomes$sum <= 9)
 
 #sum the probability of these outcomes occuring:
-sum(sum_4to9$probability)
+prob_sum_4to9 <- sum(sum_4to9$probability)
+prob_sum_4to9
 
 #The probability of the sum of dice being between 4 and 9 is 75%. 
 
-#7 What is the probability of the most probable sum?
+
+#7 -----------------------------------------------------------------------------------------------------------
+
+#What is the probability of the most probable sum?
 
 #Table to give an indication of the how frequently certain values occur.
 table(outcomes$sum)
@@ -88,15 +96,15 @@ table(outcomes$sum)
 which.max(table(outcomes$sum))
 
 #for simplicity, I simply sum the probability of the sum of outcomes being equal to 7 below (I know it could be "fancier" to generalise to all dataframes).
-sum(subset(outcomes, outcomes$sum == 7)$probability)
+probability_most_probable_sum <- sum(subset(outcomes, outcomes$sum == 7)$probability)
+probability_most_probable_sum
 
-#Unfortunately, I could not find a simple function for the mode(). Ideally the code above code be generalised to dices of different sizes.
+#Unfortunately, I could not find a simple function for the mode(). Ideally the code above code be could generalised to e.g. dices of different sizes.
 #Hopefully, this suffices for this assignment! 
 
-#------------------------------------------------------------------------------------
-#Probability of Delay
+#Probability of Delay------------------------------------------------------------------------------------
 
-#8
+#8-----------------------------------------------------------------------------------------------------------
 
 ?dbinom() #dbinom(x, size, prob, log = FALSE)
 
@@ -116,8 +124,7 @@ for (i in 0:n){
 colnames(probability_of_delay)[2:12] <- 0:11
 probability_of_delay
 
-
-#9
+#9-----------------------------------------------------------------------------------------------------------
 
 #Calculate the likelihood of observing the data below, given the probabilities above. 
 
@@ -146,6 +153,9 @@ likelihoods
 #Assuming the below prior possibilities:
 prior <- c(0.000, 0.004, 0.041, 0.123, 0.209, 0.246, 0.209, 0.123, 0.041, 0.004, 0.000)
 
+#adding to dataframe
+probability_of_delay$prior <- prior
+
 #calculate the posterior
 posterior <- likelihoods * prior
 posterior
@@ -162,6 +172,8 @@ sum(posterior_norm)
 #adding the posterior to the probability of delay dataframe
 probability_of_delay$posterior <- round(posterior_norm, 10)
 probability_of_delay
+
+#Updated the prior probabilities using Bayes' Rule to acquire the posterior distribution! 
 
 
 
