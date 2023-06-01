@@ -124,9 +124,9 @@ Prob_Defective
 #What is the probability of Event 2 occurring, given that event 1 has occurred?
 
 #The formula of Bayes' Conditional Probability: P(A | B) = P(B | A) * P(A) / P (B)
-#P(A | B) = P(A union B) / P(B)
-#P(Def_2 | Def_1) = P(Def_2 union Def_1) / P(Def_1)
-#P(Def_2 union Def_1) = (P(Def_2 | Def_1, A) + P(Def_2| Def_1, B)) 
+#P(A | B) = P(A intersect B) / P(B)
+#P(Def_2 | Def_1) = P(Def_2 intersect Def_1) / P(Def_1)
+#P(Def_2 intersect Def_1) = (P(Def_2 | Def_1, A) + P(Def_2| Def_1, B)) 
 #P(Def_2 | Def_1, A) = P(Def_2 | A) *  P(Def_1 | A) * P(A)
 #P(Def_2| Def_1, B) = P(Def_2 | B) *  P(Def_1 | B) * P(B)
 
@@ -161,7 +161,7 @@ P_Positive_B = 0.65
 
 #ASSUMPTION: IF THE ALGORITHM TESTS NEGATIVE FOR COMPANY B, IT INCORRECTLY IDENTIFIES THAT PRODUCT AS ORIGINATING FROM COMPANY A (was a little ambiguous).
 
-#P(A | Positive) --> Probability of the delivery coming from company A, if the test is positive. 
+#P(A | Positive) --> Probability of the delivery coming from company A, if the test is positive for A. 
 #P(A | Positive) = P(Positive | A) * P(A) / P(Positive for A)
 #P(Positive for A) = P(Positive | A) * P(A) + 1 - P(Positive | B) * P(B)
 
