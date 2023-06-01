@@ -159,12 +159,15 @@ P_B <- 0.50
 P_Positive_A = 0.80
 P_Positive_B = 0.65
 
-#P(A | Positive) --> Probability of the delivery coming from company A, if the test is positive. 
-#P(A | Positive) = P(Positive | A) * P(A) / P(Positive)
-#P(Positive) = P(Positive | A) * P(A) + P(Positive | B) * P(B)
+#ASSUMPTION: IF THE ALGORITHM TESTS NEGATIVE FOR COMPANY B, IT INCORRECTLY IDENTIFIES THAT PRODUCT AS ORIGINATING FROM COMPANY A (was a little ambiguous).
 
-#P(A | Positive) = P(Positive | A) * P(A) / (P(Positive | A) * P(A) + P(Positive | B) * P(B))
-P_A_Positive = (P_Positive_A * P_A) / ((P_Positive_A * P_A) + (P_Positive_B * P_B))
+#P(A | Positive) --> Probability of the delivery coming from company A, if the test is positive. 
+#P(A | Positive) = P(Positive | A) * P(A) / P(Positive for A)
+#P(Positive for A) = P(Positive | A) * P(A) + 1 - P(Positive | B) * P(B)
+
+#Filling in: P(A | Positive) = P(Positive | A) * P(A) / (P(Positive | A) * P(A) + (1 - P(Positive | B) * P(B)):
+
+P_A_Positive = (P_Positive_A * P_A) / ((P_Positive_A * P_A) + ((1 - P_Positive_B) * P_B))
 P_A_Positive
 
 #The posterior probability that the shipment is from Factory A given the output of the algorithm is 55.2%. 
